@@ -8,15 +8,27 @@ import DataPanel from "./components/DataPanel.vue";
 import ArticleMetadata from "./components/ArticleMetadata.vue"
 import giscusTalk from 'vitepress-plugin-comment-with-giscus';
 import { useData, useRoute } from 'vitepress';
+import { watch } from 'vue';
 // import confetti from "./components/Confetti.vue"
 // import MouseClick from "./components/MouseClick.vue"
 // import MouseFollower from "./components/MouseFollower.vue"
+
+// 彩虹背景动画样式
+let homePageStyle: HTMLStyleElement | undefined
 
 export default {
   ...DefaultTheme,
   Layout,
   extends: DefaultTheme,
   enhanceApp({ app, router }) {
+    // 彩虹背景动画样式
+    if (typeof window !== 'undefined') {
+      watch(
+        () => router.route.data.relativePath,
+        () => updateHomePageStyle(location.pathname === '/'),
+        { immediate: true },
+      )
+    }
     app.component("Confetti", Confetti); //注册全局组件
     app.component("DataPanel", DataPanel);//注册全局组件
     app.component('ArticleMetadata', ArticleMetadata)
@@ -50,5 +62,24 @@ export default {
       //您可以使用“comment:true”序言在页面上单独启用它
       true
     );
+  }
+}
+
+
+function updateHomePageStyle(value: boolean) {
+  if (value) {
+    if (homePageStyle) return
+
+    homePageStyle = document.createElement('style')
+    homePageStyle.innerHTML = `
+    :root {
+      animation: rainbow 12s linear infinite;
+    }`
+    document.body.appendChild(homePageStyle)
+  } else {
+    if (!homePageStyle) return
+
+    homePageStyle.remove()
+    homePageStyle = undefined
   }
 }
