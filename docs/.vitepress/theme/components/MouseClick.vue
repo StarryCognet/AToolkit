@@ -13,22 +13,23 @@ let animationFrameId = null;
 let particles = [];
 let circles = [];
 const colors = ["#FF1461", "#18FF92", "#5A87FF", "#FBF38C"];
+let lastClickTime = 0;
+const CLICK_DELAY = 100; // 点击间隔限制，防止频繁点击
 
 // 设置画布大小
 function setCanvasSize() {
   const canvasEl = canvas.value;
-  canvasEl.width = window.innerWidth * 2;
-  canvasEl.height = window.innerHeight * 2;
+  canvasEl.width = window.innerWidth;
+  canvasEl.height = window.innerHeight;
   canvasEl.style.width = window.innerWidth + "px";
   canvasEl.style.height = window.innerHeight + "px";
-  canvasEl.getContext("2d").scale(2, 2);
 }
 
 // 创建粒子
 function createParticle(x, y) {
   const angle = Math.random() * Math.PI * 2;
-  const speed = 2 + Math.random() * 3;
-  const radius = 4 + Math.random() * 8;
+  const speed = 1 + Math.random() * 2;
+  const radius = 2 + Math.random() * 6;
   const color = colors[Math.floor(Math.random() * colors.length)];
   
   return {
@@ -38,7 +39,7 @@ function createParticle(x, y) {
     color,
     speedX: Math.cos(angle) * speed,
     speedY: Math.sin(angle) * speed,
-    life: 100 + Math.random() * 100, // 生命周期
+    life: 30 + Math.random() * 40, // 减少生命周期
     currentLife: 0,
     draw(ctx) {
       ctx.beginPath();
@@ -50,13 +51,7 @@ function createParticle(x, y) {
       this.x += this.speedX;
       this.y += this.speedY;
       this.currentLife++;
-      this.radius *= 0.98; // 逐渐缩小
-      
-      // 根据生命周期调整透明度
-      const progress = this.currentLife / this.life;
-      if (progress > 0.5) {
-        this.radius *= 0.95;
-      }
+      this.radius *= 0.96;
       
       return this.currentLife < this.life;
     }
@@ -65,7 +60,7 @@ function createParticle(x, y) {
 
 // 创建圆形扩散效果
 function createCircle(x, y) {
-  const radius = 5 + Math.random() * 10;
+  const radius = 3 + Math.random() * 8;
   const color = "#FFF";
   
   return {
@@ -73,10 +68,10 @@ function createCircle(x, y) {
     y,
     radius,
     color,
-    maxRadius: 80 + Math.random() * 80,
-    lineWidth: 6,
-    alpha: 0.5,
-    speed: 1 + Math.random(),
+    maxRadius: 40 + Math.random() * 60, // 减少最大半径
+    lineWidth: 4, // 减少线宽
+    alpha: 0.6,
+    speed: 1 + Math.random() * 0.5, // 减慢速度
     draw(ctx) {
       ctx.globalAlpha = this.alpha;
       ctx.beginPath();
@@ -87,10 +82,10 @@ function createCircle(x, y) {
       ctx.globalAlpha = 1;
     },
     update() {
-      this.radius += this.speed * 2;
-      this.alpha *= 0.97;
-      this.lineWidth *= 0.98;
-      return this.radius < this.maxRadius && this.alpha > 0.01;
+      this.radius += this.speed;
+      this.alpha *= 0.95;
+      this.lineWidth *= 0.97;
+      return this.radius < this.maxRadius && this.alpha > 0.05;
     }
   };
 }
@@ -99,7 +94,7 @@ function createCircle(x, y) {
 function createRandomCircle(x, y) {
   const radius = 1;
   const color = colors[Math.floor(Math.random() * colors.length)];
-  const maxRadius = 50 + Math.random() * 40;
+  const maxRadius = 30 + Math.random() * 30; // 减少最大半径
   
   return {
     x,
@@ -108,7 +103,7 @@ function createRandomCircle(x, y) {
     color,
     maxRadius,
     alpha: 1,
-    speed: 1 + Math.random(),
+    speed: 0.5 + Math.random() * 1.5, // 减慢速度
     draw(ctx) {
       ctx.globalAlpha = this.alpha;
       ctx.beginPath();
@@ -118,9 +113,9 @@ function createRandomCircle(x, y) {
       ctx.globalAlpha = 1;
     },
     update() {
-      this.radius += this.speed * 3;
-      this.alpha *= 0.96;
-      return this.radius < this.maxRadius && this.alpha > 0.01;
+      this.radius += this.speed;
+      this.alpha *= 0.94;
+      return this.radius < this.maxRadius && this.alpha > 0.05;
     }
   };
 }
@@ -149,11 +144,18 @@ function animate() {
 
 // 处理点击事件
 function handleClick(e) {
-  const x = e.clientX || e.touches[0].clientX;
-  const y = e.clientY || e.touches[0].clientY;
+  const now = Date.now();
+  // 限制点击频率，防止性能问题
+  if (now - lastClickTime < CLICK_DELAY) {
+    return;
+  }
+  lastClickTime = now;
   
-  // 创建粒子
-  for (let i = 0; i < 20; i++) {
+  const x = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX) || 0;
+  const y = e.clientY || (e.touches && e.touches[0] && e.touches[0].clientY) || 0;
+  
+  // 减少粒子数量
+  for (let i = 0; i < 12; i++) {
     particles.push(createParticle(x, y));
   }
   

@@ -1,6 +1,6 @@
-[一小时快速上手 Electron.pdf](https://www.yuque.com/attachments/yuque/0/2025/pdf/42939896/1737339268340-d8dc7a24-bf7a-4d34-b820-18ca8289ad8f.pdf)
-
 # 什么是 Electron？
+
+[一小时快速上手 Electron.pdf](https://www.yuque.com/attachments/yuque/0/2025/pdf/42939896/1737339268340-d8dc7a24-bf7a-4d34-b820-18ca8289ad8f.pdf)
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737339589682-d3c6e6d1-4a5b-4ccb-b6e1-04817e3a8afc.png)
 
@@ -13,26 +13,26 @@ Web 技术来构建桌⾯应⽤程序，它的本质是结合了 **<font style="
 - ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737339804187-bc483b7a-8c46-49d8-9c3a-490c5e54f2c6.png)1Password
 - ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737339833427-878ce119-fb6a-4fbd-8d63-b52de2b976e5.png)新版 QQ
 
-# Electron 的优势
+## Electron 的优势
 
 1. **可跨平台：**同⼀套代码可以构建出能在：Windows、macOS、Linux 上运⾏的应⽤程序。
 2. **上⼿容易：**使⽤ Web 技术就可以轻松完成开发桌⾯应⽤程序。
 3. **底层权限：**允许应⽤程序访问⽂件系统、操作系统等底层功能，从⽽实现复杂的系统交互。
 4. **社区⽀持：**拥有⼀个庞⼤且活跃的社区，开发者可以轻松找到⽂档、教程和开源库。
 
-# Electron 技术架构
+## Electron 技术架构
 
-## 技术架构
+### 技术架构
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737340036521-e36298a8-3dd9-47aa-ad7e-47728c376633.png)
 
-## 进程模型
+### 进程模型
 
 > 此处我们只是先了解⼀下进程模型，后⾯会详细讲解。
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737340085734-9eb33f7b-36c7-461e-b92f-36bf63abdfdd.png)
 
-# 搭建一个工程
+## 搭建一个工程
 
 `init`初始化命令会提示您在项目初始化配置中设置一些值 为本教程的目的，有几条规则需要遵循：
 
@@ -109,7 +109,7 @@ npm start
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737340603478-7c20bb93-e3cd-40ef-8296-13125763051d.png)
 
-# 加载本地页面
+## 加载本地页面
 
 - 创建 `pages/index.html` 编写内容：
 
@@ -140,7 +140,7 @@ win.loadFile("./pages/index.html");
 ```
 
 <details class="lake-collapse"><summary id="u35a8855a"><span class="ne-text">上述配置的说明</span></summary><ol class="ne-ol"><li id="u73e1b569" data-lake-index-type="0"><code class="ne-code"><strong><span class="ne-text" style="color: #2F4BDA">default-src 'self'</span></strong></code><span class="ne-text"><br /></span><code class="ne-code"><span class="ne-text">default-src</span></code><span class="ne-text"> ：配置加载策略，适⽤于所有未在其它指令中明确指定的资源类型。<br /></span><code class="ne-code"><span class="ne-text">self</span></code><span class="ne-text"> ：仅允许从同源的资源加载，禁⽌从不受信任的外部来源加载，提⾼安全性。</span></li><li id="uba237d9c" data-lake-index-type="0"><code class="ne-code"><strong><span class="ne-text" style="color: #2F4BDA">style-src 'self' 'unsafe-inline'</span></strong></code><span class="ne-text"><br /></span><code class="ne-code"><span class="ne-text">style-src</span></code><span class="ne-text"> ：指定样式表（CSS）的加载策略。<br /></span><code class="ne-code"><span class="ne-text">self</span></code><span class="ne-text"> ：仅允许从同源的资源加载，禁⽌从不受信任的外部来源加载，提⾼安全性。<br /></span><code class="ne-code"><span class="ne-text">unsafe-inline</span></code><span class="ne-text"> ：允许在HTML⽂档内使⽤内联样式。</span></li><li id="ua6be7113" data-lake-index-type="0"><code class="ne-code"><strong><span class="ne-text" style="color: #2F4BDA">img-src 'self' data:</span></strong></code><span class="ne-text"><br /></span><code class="ne-code"><span class="ne-text">img-src</span></code><span class="ne-text"> ：指定图像资源的加载策略。<br /></span><code class="ne-code"><span class="ne-text">self</span></code><span class="ne-text"> ：表示仅允许从同源加载图像。<br /></span><code class="ne-code"><span class="ne-text">data</span></code><span class="ne-text">: ：允许使⽤ data: URI 来嵌⼊图像。这种URI模式允许将图像数据直接嵌⼊到HTML或CSS中，⽽不是通过外部链接引⽤。</span></li></ol><p id="u67d1c16b" class="ne-p"><strong><span class="ne-text">关于 CSP 的详细说明请参考：</span></strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy" data-href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank" class="ne-link"><span class="ne-text">MDN-Content-Security-Policy</span></a><span class="ne-text">、</span><a href="https://www.electronjs.org/docs/latest/tutorial/security" data-href="https://www.electronjs.org/docs/latest/tutorial/security" target="_blank" class="ne-link"><span class="ne-text">Electron Security</span></a></p></details>
-# 完善窗口行为
+## 完善窗口行为
 1. Windows 和 Linux 平台窗⼝特点是：关闭所有窗⼝时退出应⽤。
 
 ```javascript
@@ -165,7 +165,7 @@ app.on("ready", () => {
 });
 ```
 
-# 配置自动重启
+## 配置自动重启
 
 1. 安装 Nodemon
 
@@ -194,7 +194,7 @@ npm i nodemon -D
 
 配置好以后，当代码修改后，应⽤就会⾃动重启了。
 
-# 主进程与渲染进程
+## 主进程与渲染进程
 
 下图是 Chrome 浏览器的程序架构，图来⾃于[Chrome 漫画](https://www.google.com)。
 
@@ -202,17 +202,17 @@ npm i nodemon -D
 
 Electron 应⽤的结构与上图⾮常相似，在 Electron 中主要控制两类进程：主进程、渲染器进程。
 
-## 主进程
+### 主进程
 
 每个 Electron 应⽤都有⼀个单⼀的主进程，作为应⽤程序的⼊⼝点。 主进程在 Node.js 环境中运⾏，它具有 require 模块和使⽤所有 Node.js API 的能⼒，主进程的核⼼就是：**使用 Browserwindow 来创建和管理窗口**
 
-## 渲染进程
+### 渲染进程
 
 每个 BrowserWindow 实例都对应⼀个单独的渲染器进程，运⾏在渲染器进程中的代码，必须遵守⽹⻚标准，这也就意味着：**渲染器进程无权直接访问**`**require**`**或使用任何**`**Node.js**`** 的 API。**
 
 > 问题产⽣：处于渲染器进程的⽤户界⾯，该怎样才与 Node.js 和 Electron 的原⽣桌⾯功能进⾏交互呢？
 
-# Preload 脚本
+## Preload 脚本
 
 预加载（Preload）脚本是运⾏在渲染进程中的， 但它是在**<font style="color:#DF2A3F;">网页内容加载之前</font>**执⾏的，这意味着它具有⽐普通渲染器代码更⾼的权限，可以访问 Node.js 的 API，同时⼜可以与⽹⻚内容进⾏安全的交互。
 
@@ -272,7 +272,7 @@ btn.addEventListener("click", () => {
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737342027551-1a08a219-9920-4604-ba95-721361986555.png)
 
-# 进程通信（IPC）
+## 进程通信（IPC）
 
 > 值得注意的是：
 >
@@ -288,7 +288,7 @@ btn.addEventListener("click", () => {
 - `IPC` 是 `Electron`中最为核⼼的内容，它是从 `UI` 调⽤原⽣ `API` 的唯⼀⽅法！
 - `Electron` 中，主要使⽤ [ipcMain](https://www.electronjs.org/zh/docs/latest/api/ipc-main) 和 [ipcRenderer](https://www.electronjs.org/zh/docs/latest/api/ipc-renderer) 来定义“通道”，进⾏进程通信。
 
-## 渲染进程 ➡ 进程（单向）
+### 渲染进程 ➡ 进程（单向）
 
 概述：在<font style="color:#117CEE;">渲染器进程</font>中[ ipcRenderer.send](https://www.electronjs.org/zh/docs/latest/api/ipc-renderer) 发送消息，在**<font style="color:#DF2A3F;">主进程</font>**中使⽤**<font style="color:#DF2A3F;"> ipcMain.on</font>** 接收消息。常⽤于：**在 Web 中调用主进程的 API**，例如下⾯的这个需求：
 
@@ -346,7 +346,7 @@ function createFile(event, data) {
 }
 ```
 
-## 渲染进程 ↔ 主进程（双向）
+### 渲染进程 ↔ 主进程（双向）
 
 概述：<font style="color:#117CEE;">渲染进程</font>通过[ipcRenderer.invoke](https://www.electronjs.org/zh/docs/latest/api/ipc-renderer#ipcrendererinvokechannel-args) 发送消息，**<font style="color:#DF2A3F;">主进程</font>**使⽤ **<font style="color:#DF2A3F;">ipcMain.handle</font>** 接收并处理消息。
 
@@ -404,7 +404,7 @@ function readFile(event, path) {
 }
 ```
 
-## 主进程到 ➡ 渲染进程
+### 主进程到 ➡ 渲染进程
 
 概述：<font style="color:#DF2A3F;">主进程</font>使⽤ <font style="color:#DF2A3F;">win.webContents.send</font> 发送消息，<font style="color:#117CEE;">渲染进程</font>通过<font style="color:#117CEE;">ipcRenderer.on</font> 处理消息，
 
@@ -455,7 +455,7 @@ function createWindow() {
 }
 ```
 
-# 打包应用
+## 打包应用
 
 使⽤ electron-builder 打包应⽤
 
@@ -515,7 +515,7 @@ npm install electron-builder -D
 npm run build
 ```
 
-# electron-vite<font style="color:#117CEE;"></font>
+## electron-vite<font style="color:#117CEE;"></font>
 
 **electron-vite** 是⼀个新型构建⼯具，旨在为 <font style="color:#117CEE;">Electron </font>提供更快、更精简的体验。主要由五部分组成：
 

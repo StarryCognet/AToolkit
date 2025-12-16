@@ -1,43 +1,52 @@
 {
-  "hash": "c9de3633",
+  "hash": "3c5ab2ed",
   "configHash": "27601525",
-  "lockfileHash": "43b21469",
-  "browserHash": "be545adb",
+  "lockfileHash": "876848f3",
+  "browserHash": "58c66439",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/.pnpm/vue@3.5.25/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "9227c014",
+      "fileHash": "f935d9ff",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/.pnpm/@vue+devtools-api@8.0.5/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "d898bbd8",
+      "fileHash": "471be932",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/.pnpm/@vueuse+core@14.1.0_vue@3.5.25/node_modules/@vueuse/core/dist/index.js",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "e4749f52",
+      "fileHash": "f0a5a59d",
       "needsInterop": false
     },
     "canvas-confetti": {
       "src": "../../../../node_modules/.pnpm/canvas-confetti@1.9.4/node_modules/canvas-confetti/dist/confetti.module.mjs",
       "file": "canvas-confetti.js",
-      "fileHash": "69af6ea5",
+      "fileHash": "1fb40b99",
       "needsInterop": false
     },
     "busuanzi.pure.js": {
       "src": "../../../../node_modules/.pnpm/busuanzi.pure.js@1.0.3/node_modules/busuanzi.pure.js/index.js",
       "file": "busuanzi__pure__js.js",
-      "fileHash": "0eb3ec37",
+      "fileHash": "943398e1",
       "needsInterop": true
+    },
+    "vitepress-plugin-comment-with-giscus": {
+      "src": "../../../../node_modules/.pnpm/vitepress-plugin-comment-with-giscus@1.1.15_vue@3.5.25/node_modules/vitepress-plugin-comment-with-giscus/lib/giscus.js",
+      "file": "vitepress-plugin-comment-with-giscus.js",
+      "fileHash": "6f163a7b",
+      "needsInterop": false
     }
   },
   "chunks": {
     "chunk-BECINA54": {
       "file": "chunk-BECINA54.js"
+    },
+    "giscus-aTimukGI-VEMCOKMY": {
+      "file": "giscus-aTimukGI-VEMCOKMY.js"
     },
     "chunk-BUSYA2B4": {
       "file": "chunk-BUSYA2B4.js"

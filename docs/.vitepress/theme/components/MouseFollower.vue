@@ -10,11 +10,10 @@ import { ref, onMounted, onUnmounted } from "vue";
 const canvas = ref(null);
 let ctx = null;
 let particles = [];
-let mouse = { x: globalThis ?.innerWidth / 2, y: globalThis ?.innerHeight / 2 };
-let targetMouse = { x: globalThis ?.innerWidth / 2, y: globalThis ?.innerHeight / 2 };
-let lastMouse = { x: globalThis ?.innerWidth / 2, y: globalThis ?.innerHeight / 2 };
+let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let targetMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+let lastMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 let animationFrameId = null;
-
 class Particle {
   constructor() {
     this.reset();
@@ -24,24 +23,24 @@ class Particle {
     // 随机角度
     this.angle = Math.random() * Math.PI * 2;
     // 更小的随机半径 (15-25)
-    this.radius = Math.random() * 40 + 25;
+    this.radius = Math.random() * 30 + 20;
     // 随机旋转速度
-    this.speed = (Math.random() * 2 + 2) * 0.01;
+    this.speed = (Math.random() * 1.5 + 1.5) * 0.01;
     // 更小的粒子大小 (1-2)
-    this.size = Math.random() * 3 + 1;
+    this.size = Math.random() * 2 + 1;
     // 随机颜色
     this.hue = Math.random() * 360;
     // 随机方向
     this.clockwise = Math.random() > 0.5;
     // 更小的随机偏移
-    this.offsetX = (Math.random() - 0.5) * 10;
-    this.offsetY = (Math.random() - 0.5) * 10;
+    this.offsetX = (Math.random() - 0.5) * 8;
+    this.offsetY = (Math.random() - 0.5) * 8;
     // 生命周期
     this.life = Math.random() * 0.5 + 0.5;
     this.maxLife = this.life;
     // 拖尾效果
     this.trail = [];
-    this.trailLength = Math.floor(Math.random() * 3) + 2; // 2-4个拖尾点
+    this.trailLength = Math.floor(Math.random() * 2) + 1; // 减少拖尾点数量
   }
 
   update() {
@@ -71,7 +70,7 @@ class Particle {
     }
 
     // 更新生命周期
-    this.life -= 0.002;
+    this.life -= 0.005; // 加快生命周期消耗
     if (this.life <= 0) {
       this.reset();
     }
@@ -137,8 +136,8 @@ function animate() {
 
   updateMousePosition();
 
-  // 随机添加新粒子
-  if (particles.length < 25 && Math.random() < 0.1) {
+  // 限制粒子数量并减少创建频率
+  if (particles.length < 15 && Math.random() < 0.05) { // 减少粒子总数并降低创建概率
     particles.push(new Particle());
   }
 
@@ -148,41 +147,44 @@ function animate() {
     particle.draw();
   });
 
+  // 移除无效粒子
+  particles = particles.filter(particle => particle.life > 0);
+
   animationFrameId = requestAnimationFrame(animate);
 }
 
 function handleResize() {
   if (!canvas.value) return;
-  canvas.value.width = globalThis .innerWidth;
-  canvas.value.height = globalThis .innerHeight;
+  canvas.value.width = window.innerWidth;
+  canvas.value.height = window.innerHeight;
 }
 
 function initParticles() {
   particles = [];
-  // 初始创建12-15个粒子
-  const initialCount = Math.floor(Math.random() * 4) + 12;
+  // 初始创建更少的粒子
+  const initialCount = Math.floor(Math.random() * 3) + 8;
   for (let i = 0; i < initialCount; i++) {
     particles.push(new Particle());
   }
 }
 
 onMounted(() => {
-  if (typeof globalThis  !== "undefined") {
+  if (typeof window !== "undefined") {
     ctx = canvas.value.getContext("2d");
     handleResize();
     initParticles();
 
-    globalThis .addEventListener("resize", handleResize);
-    globalThis .addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
 
     animate();
   }
 });
 
 onUnmounted(() => {
-  if (typeof globalThis  !== "undefined") {
-    globalThis .removeEventListener("resize", handleResize);
-    globalThis .removeEventListener("mousemove", handleMouseMove);
+  if (typeof window !== "undefined") {
+    window.removeEventListener("resize", handleResize);
+    window.removeEventListener("mousemove", handleMouseMove);
     if (animationFrameId) {
       cancelAnimationFrame(animationFrameId);
     }
