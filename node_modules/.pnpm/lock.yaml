@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      busuanzi.pure.js:
+        specifier: ^1.0.3
+        version: 1.0.3
+      canvas-confetti:
+        specifier: ^1.9.4
+        version: 1.9.4
       vitepress:
         specifier: 2.0.0-alpha.15
         version: 2.0.0-alpha.15(postcss@8.5.6)
@@ -479,6 +485,12 @@ packages:
 
   birpc@2.9.0:
     resolution: {integrity: sha512-KrayHS5pBi69Xi9JmvoqrIgYGDkD6mcSe/i6YKi3w5kekCLzrX4+nawcXqrj2tIp50Kw/mT/s3p+GVK0A0sKxw==}
+
+  busuanzi.pure.js@1.0.3:
+    resolution: {integrity: sha512-tPULdyx+8NNb9geZYDpktKmHAYx9f2LEOBaHyWCaM7iPEMIa/43KgYAUluuU7YG9UFSOFpj4dO7Nj2Vlu3V9Rg==}
+
+  canvas-confetti@1.9.4:
+    resolution: {integrity: sha512-yxQbJkAVrFXWNbTUjPqjF7G+g6pDotOUHGbkZq2NELZUMDpiJ85rIEazVb8GTaAptNW2miJAXbs1BtioA251Pw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1085,6 +1097,10 @@ snapshots:
       vue: 3.5.25
 
   birpc@2.9.0: {}
+
+  busuanzi.pure.js@1.0.3: {}
+
+  canvas-confetti@1.9.4: {}
 
   ccount@2.0.1: {}
 
