@@ -2,6 +2,8 @@
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
+import MouseClick from "./components/MouseClick.vue";
+import MouseFollower from "./components/MouseFollower.vue";
 
 const { isDark } = useData()
 
@@ -41,7 +43,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
 </script>
 
 <template>
-  <DefaultTheme.Layout />
+  <DefaultTheme.Layout>
+    <template #layout-top>
+      <MouseFollower />
+      <MouseClick />
+    </template>
+  </DefaultTheme.Layout>
 </template>
 
 <style>

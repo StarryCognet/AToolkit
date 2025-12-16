@@ -7,7 +7,7 @@ hero:
   text: "A整合包"
   tagline: 我的伟大项目标语
   image:
-    src: /KawaiiMu.jpg
+    src: /KawaiiMu.png
     alt: 背景图
   actions:
     - theme: brand
