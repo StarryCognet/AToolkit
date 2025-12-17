@@ -8,7 +8,15 @@ import DataPanel from "./components/DataPanel.vue";
 import ArticleMetadata from "./components/ArticleMetadata.vue"
 import giscusTalk from 'vitepress-plugin-comment-with-giscus';
 import { useData, useRoute } from 'vitepress';
+import mediumZoom from 'medium-zoom';
+import { onMounted, watch, nextTick } from 'vue';
+import { useRoute } from 'vitepress';
 import { watch } from 'vue';
+
+import { h } from 'vue' // h函数
+// 组件
+import backtotop from "./components/backtotop.vue";
+import notice from "./components/notice.vue";
 // import confetti from "./components/Confetti.vue"
 // import MouseClick from "./components/MouseClick.vue"
 // import MouseFollower from "./components/MouseFollower.vue"
@@ -18,7 +26,13 @@ let homePageStyle: HTMLStyleElement | undefined
 
 export default {
   ...DefaultTheme,
-  Layout,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      // 指定组件使用layout-top插槽,关闭公告只需关闭下面这一行代码
+      // 'layout-top': () => h(notice),
+      'doc-footer-before': () => h(backtotop),
+    })
+  },
   extends: DefaultTheme,
   enhanceApp({ app, router }) {
     // 彩虹背景动画样式
@@ -44,6 +58,17 @@ export default {
     // Get frontmatter and route
     const { frontmatter } = useData();
     const route = useRoute();
+    const initZoom = () => {
+      // mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' }); // 默认
+      mediumZoom('.main img', { background: 'var(--vp-c-bg)' }); // 不显式添加{data-zoomable}的情况下为所有图像启用此功能
+    };
+    onMounted(() => {
+      initZoom();
+    });
+    watch(
+      () => route.path,
+      () => nextTick(() => initZoom())
+    );
     // giscus配置
     giscusTalk({
       repo: 'StarryCognet/AToolkit', //仓库

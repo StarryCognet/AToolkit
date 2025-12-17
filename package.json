@@ -2,8 +2,11 @@
   "devDependencies": {
     "busuanzi.pure.js": "^1.0.3",
     "canvas-confetti": "^1.9.4",
+    "medium-zoom": "^1.1.0",
+    "nprogress-v2": "^1.1.10",
     "vitepress": "2.0.0-alpha.15",
-    "vitepress-plugin-comment-with-giscus": "^1.1.15"
+    "vitepress-plugin-comment-with-giscus": "^1.1.15",
+    "vitepress-sidebar": "^1.33.1"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
