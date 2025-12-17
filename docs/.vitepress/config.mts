@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { generateSidebar } from 'vitepress-sidebar';
+import { pagefindPlugin, chineseSearchOptimize } from 'vitepress-plugin-pagefind'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -11,6 +12,9 @@ export default defineConfig({
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    sidebarMenuLabel: "菜单",
+    outlineTitle: "页面内容",
+    darkModeSwitchLabel: "切换主题",
     nav: [
       { text: '首页', link: '/' },
       { text: '示例', link: '/markdown-examples' },
@@ -80,5 +84,27 @@ export default defineConfig({
         return htmlResult;
       }
     }
+  },
+  vite: {
+    plugins: [
+      pagefindPlugin({
+        // ✅ 必须开启中文优化，否则中文搜索效果很差
+        customSearchQuery: chineseSearchOptimize,
+
+        // 自定义UI文本
+        btnPlaceholder: '搜索工具',
+        placeholder: '搜索文档、工具介绍...',
+        emptyText: '没有找到相关内容',
+        heading: '共找到 {{searchResult}} 条结果',
+
+        // 排除不需要索引的元素
+        excludeSelector: [
+          'img',                    // 排除图片alt文本
+          'a.header-anchor',         // 排除锚点链接
+          '.vp-doc h1',             // 可选：排除h1标题（通常是页面标题）
+          '.vp-footer',             // 排除页脚
+        ]
+      })
+    ]
   }
 })

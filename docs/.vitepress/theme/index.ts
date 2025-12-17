@@ -10,8 +10,10 @@ import giscusTalk from 'vitepress-plugin-comment-with-giscus';
 import { useData, useRoute } from 'vitepress';
 import mediumZoom from 'medium-zoom';
 import { onMounted, watch, nextTick } from 'vue';
-import { useRoute } from 'vitepress';
-import { watch } from 'vue';
+import { NProgress } from "nprogress-v2/dist/index.js"; // 进度条组件
+import "nprogress-v2/dist/index.css"; // 进度条样式
+// import { useRoute } from 'vitepress';
+// import { watch } from 'vue';
 
 import { h } from 'vue' // h函数
 // 组件
@@ -45,6 +47,17 @@ export default {
         () => updateHomePageStyle(location.pathname === '/'),
         { immediate: true },
       )
+    }
+    // 非SSR环境下配置路由进度条
+    // @ts-ignore-error
+    if (!import.meta.env.SSR) {
+      NProgress.configure({ showSpinner: false });
+      router.onBeforeRouteChange = () => NProgress.start();
+      router.onAfterRouteChange = () => {
+        setTimeout(() => {
+          NProgress.done();
+        }, 100);
+      };
     }
     app.component("Confetti", Confetti); //注册全局组件
     app.component("DataPanel", DataPanel);//注册全局组件
