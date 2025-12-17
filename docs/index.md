@@ -32,5 +32,6 @@ features:
     details: 包含详细的使用教程，帮助您更好地掌握各类工具的使用方法
 ---
 
+<HomeUnderline />
 <Confetti />
 <DataPanel />

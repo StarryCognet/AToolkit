@@ -18,8 +18,9 @@ import { h } from 'vue' // h函数
 import backtotop from "./components/backtotop.vue";
 import notice from "./components/notice.vue";
 // import confetti from "./components/Confetti.vue"
-// import MouseClick from "./components/MouseClick.vue"
-// import MouseFollower from "./components/MouseFollower.vue"
+import MouseClick from "./components/MouseClick.vue"
+import MouseFollower from "./components/MouseFollower.vue"
+import HomeUnderline from "./components/HomeUnderline.vue"
 
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined
@@ -31,6 +32,8 @@ export default {
       // 指定组件使用layout-top插槽,关闭公告只需关闭下面这一行代码
       // 'layout-top': () => h(notice),
       'doc-footer-before': () => h(backtotop),
+      // 添加鼠标特效组件到布局中
+      'layout-top': () => [h(MouseClick), h(MouseFollower)]
     })
   },
   extends: DefaultTheme,
@@ -46,12 +49,13 @@ export default {
     app.component("Confetti", Confetti); //注册全局组件
     app.component("DataPanel", DataPanel);//注册全局组件
     app.component('ArticleMetadata', ArticleMetadata)
-    // app.component('MouseClick', MouseClick)
-    // app.component('MouseFollower', MouseFollower)
+    app.component('MouseClick', MouseClick)
+    app.component('MouseFollower', MouseFollower)
+    app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
     if (inBrowser) {
       router.onAfterRouteChanged = () => {
-        busuanzi.fetch();
-      };
+        busuanzi.fetch()
+      }
     }
   },
   setup() {
