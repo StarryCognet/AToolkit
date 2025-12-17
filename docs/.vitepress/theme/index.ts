@@ -2,10 +2,11 @@ import DefaultTheme from 'vitepress/theme'
 import "./style/index.css"; //引入自定义的样式
 import Layout from './Layout.vue'
 import Confetti from "./components/Confetti.vue";
-import { inBrowser } from "vitepress";
-import busuanzi from "busuanzi.pure.js";
+import { inBrowser } from 'vitepress'
+import busuanzi from 'busuanzi.pure.js'
 import DataPanel from "./components/DataPanel.vue";
 import ArticleMetadata from "./components/ArticleMetadata.vue"
+import ToolList from "./components/ToolList.vue"
 import giscusTalk from 'vitepress-plugin-comment-with-giscus';
 import { useData, useRoute } from 'vitepress';
 import mediumZoom from 'medium-zoom';
@@ -40,6 +41,11 @@ export default {
   },
   extends: DefaultTheme,
   enhanceApp({ app, router }) {
+    if (inBrowser) {
+      router.onAfterRouteChanged = () => {
+        busuanzi.fetch()
+      }
+    }
     // 彩虹背景动画样式
     if (typeof window !== 'undefined') {
       watch(
@@ -65,11 +71,7 @@ export default {
     app.component('MouseClick', MouseClick)
     app.component('MouseFollower', MouseFollower)
     app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
-    if (inBrowser) {
-      router.onAfterRouteChanged = () => {
-        busuanzi.fetch()
-      }
-    }
+    app.component('ToolList', ToolList)
   },
   setup() {
     // Get frontmatter and route

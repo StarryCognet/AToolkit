@@ -425,13 +425,17 @@
 
 /* 按钮渐变色 */
 .VPButton.brand {
-  border: 2px solid transparent;
+  /* border: 2px solid transparent; */
+  padding: 4px;
+  /* border-radius: 0px !important; */
   background: linear-gradient(120deg, var(--rainbow-prev) 30%, var(--rainbow-next)) !important;
   color: white !important;
+  transition: 0.3s ease;
 }
 
 .VPButton.brand:hover {
-  border: 2px solid transparent;
+  /* border: 2px solid transparent; */
+  padding: 0px 20px;
   background: linear-gradient(120deg, var(--rainbow-prev) 30%, var(--rainbow-next)) !important;
   color: white !important;
   opacity: 0.9;

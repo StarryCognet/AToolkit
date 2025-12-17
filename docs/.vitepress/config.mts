@@ -17,8 +17,16 @@ export default defineConfig({
     darkModeSwitchLabel: "切换主题",
     nav: [
       { text: '首页', link: '/' },
-      { text: '示例', link: '/markdown-examples' },
-      { text: '目录', link: '/catalogue/' }
+      { text: '教程', link: '/使用教程' },
+      { text: '目录', link: '/目录' },
+      {
+        text: 'Tools',
+        items: [
+          { text: 'Item A', link: '/item-1' },
+          { text: 'Item B', link: '/item-2' },
+          { text: 'Item C', link: '/item-3' }
+        ]
+      }
     ],
 
     sidebar: generateSidebar({

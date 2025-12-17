@@ -16,10 +16,10 @@ hero:
       link: https://file.starrymiku.com/AToolkit/docs/A%E6%95%B4%E5%90%88%E5%8C%85%E5%AF%BC%E8%88%AA.xlsx
     - theme: alt
       text: 查看目录
-      link: /api-examples
+      link: /目录
     - theme: alt
       text: 使用教程
-      link: /api-examples
+      link: /使用教程
 
 features:
   - title: 持续更新
