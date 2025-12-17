@@ -20,11 +20,19 @@ export default defineConfig({
       { text: '教程', link: '/使用教程' },
       { text: '目录', link: '/目录' },
       {
-        text: 'Tools',
+        text: '工具分类',
         items: [
-          { text: 'Item A', link: '/item-1' },
-          { text: 'Item B', link: '/item-2' },
-          { text: 'Item C', link: '/item-3' }
+          { text: '系统工具', link: '/tools/系统工具' },
+          { text: '硬件检测与优化', link: '/tools/硬件检测与优化' },
+          { text: '磁盘管理与清理', link: '/tools/磁盘管理与清理' },
+          { text: '文件管理', link: '/tools/文件管理' },
+          { text: '压缩与格式转换', link: '/tools/压缩与格式转换' },
+          { text: '多媒体处理', link: '/tools/多媒体处理' },
+          { text: '截图与演示', link: '/tools/截图与演示' },
+          { text: '网络工具', link: '/tools/网络工具' },
+          { text: '安全与卸载', link: '/tools/安全与卸载' },
+          { text: '游戏相关', link: '/tools/游戏相关' },
+          { text: '效率与时间管理', link: '/tools/效率与时间管理' }
         ]
       }
     ],

@@ -200,7 +200,7 @@ npm i nodemon -D
 
 ![](https://cdn.nlark.com/yuque/0/2025/png/42939896/1737341586084-93056f12-a7de-4afb-af29-d3000f4bdd97.png)
 
-Electron 应⽤的结构与上图⾮常相似，在 Electron 中主要控制两类进程：主进程、渲染器进程。
+Electron 应⽤的结构与上图⾮常相似，在 Electron 中主要控制两 进程：主进程、渲染器进程。
 
 ### 主进程
 
