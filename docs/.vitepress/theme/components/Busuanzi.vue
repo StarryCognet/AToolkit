@@ -3,13 +3,15 @@
     <div class="busuanzi-stats" v-if="showStats">
       <span class="stat-item">
         <span class="stat-label">页面浏览量:</span>
-        <span class="stat-value" id="busuanzi_value_page_pv">-</span>|
-
+        <span class="stat-value" id="busuanzi_value_page_pv"></span>
+      </span>
+      <span class="stat-item">
         <span class="stat-label">站点访客数:</span>
-        <span class="stat-value" id="busuanzi_value_site_uv">-</span>|
-
+        <span class="stat-value" id="busuanzi_value_site_uv"></span>
+      </span>
+      <span class="stat-item">
         <span class="stat-label">站点总访问量:</span>
-        <span class="stat-value" id="busuanzi_value_site_pv">-</span>
+        <span class="stat-value" id="busuanzi_value_site_pv"></span>
       </span>
     </div>
     <!-- 加载时显示的模糊动态彩虹占位符 -->
@@ -33,7 +35,7 @@ if (typeof window !== "undefined") {
     // 延迟一小段时间再显示，确保更好的视觉效果
     setTimeout(() => {
       showStats.value = true;
-    }, 500);
+    }, 300);
 
     // 检查是否已经存在不蒜子对象
     if (typeof busuanzi !== "undefined") {
@@ -61,7 +63,6 @@ if (typeof window !== "undefined") {
         script.onerror = () => {
           // CDN加载失败时尝试备用方案
           console.warn("不蒜子CDN加载失败，尝试备用方案");
-          // 可以在这里添加备用统计方案
         };
         
         document.head.appendChild(script);
@@ -78,7 +79,7 @@ if (typeof window !== "undefined") {
 .busuanzi-container {
   margin: 16px 0 24px 0;
   padding: 8px 0;
-  border-bottom: 1px solid var(--vp-c-divider);
+  /* border-bottom: 1px solid var(--vp-c-divider); */
 }
 
 .busuanzi-stats {

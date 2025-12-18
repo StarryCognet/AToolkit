@@ -71,55 +71,108 @@ export default {
     app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
     app.component('ToolList', ToolList)
     app.component('Busuanzi', Busuanzi) // 注册不蒜子组件
-
+    
     // 不蒜子统计功能增强实现
     if (inBrowser) {
+      // 加载不蒜子脚本的函数
+      const loadBusuanziScript = () => {
+        return new Promise((resolve) => {
+          // 检查是否已经存在busuanzi对象
+          if (typeof busuanzi !== 'undefined') {
+            resolve(true);
+            return;
+          }
+          
+          // 创建脚本元素
+          const script = document.createElement('script');
+          script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.js';
+          script.async = true;
+          script.charset = 'utf-8';
+          script.crossOrigin = 'anonymous';
+          
+          script.onload = () => {
+            resolve(true);
+          };
+          
+          script.onerror = () => {
+            console.warn('不蒜子统计脚本加载失败');
+            resolve(false);
+          };
+          
+          document.head.appendChild(script);
+        });
+      };
+      
+      // 获取统计数据的函数
+      const fetchBusuanziStats = async () => {
+        try {
+          // 确保脚本已加载
+          await loadBusuanziScript();
+          
+          // 延迟执行确保DOM已更新
+          setTimeout(() => {
+            if (typeof busuanzi !== 'undefined') {
+              busuanzi.fetch();
+            }
+          }, 100);
+        } catch (error) {
+          console.warn('获取不蒜子统计数据时出错:', error);
+        }
+      };
+
       // 页面首次加载时初始化统计数据
       const initBusuanzi = () => {
         // 确保DOM已经加载完成
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', () => {
-            if (typeof busuanzi !== 'undefined') {
-              setTimeout(() => busuanzi.fetch(), 300);
-            }
+            fetchBusuanziStats();
           });
         } else {
           // DOM已经加载完成
-          if (typeof busuanzi !== 'undefined') {
-            setTimeout(() => busuanzi.fetch(), 300);
-          }
+          fetchBusuanziStats();
         }
       };
 
-      // 路由变化时更新统计数据
-      const originalOnAfterRouteChanged = router.onAfterRouteChanged;
-      router.onAfterRouteChanged = () => {
-        // 执行原来的回调（如果有）
-        if (originalOnAfterRouteChanged) {
-          originalOnAfterRouteChanged();
+      // 路由变化处理 - 确保每次路由变化都刷新统计数据
+      const handleRouteChange = async () => {
+        // 确保在浏览器环境中执行
+        if (typeof window !== 'undefined') {
+          await fetchBusuanziStats();
         }
+      };
 
-        // 更新不蒜子统计
-        setTimeout(() => {
-          if (typeof busuanzi !== 'undefined') {
-            busuanzi.fetch();
-          } else {
-            // 如果busuanzi未定义，尝试重新加载
-            const script = document.createElement('script');
-            script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.js';
-            script.async = true;
-            script.charset = 'utf-8';
-            script.crossOrigin = 'anonymous';
-            script.onload = () => {
-              setTimeout(() => {
-                if (typeof busuanzi !== 'undefined') {
-                  busuanzi.fetch();
-                }
-              }, 100);
-            };
-            document.head.appendChild(script);
+      // 保存原始的路由处理函数
+      const originalOnAfterRouteChanged = router.onAfterRouteChanged;
+      const originalOnBeforeRouteChange = router.onBeforeRouteChange;
+
+      // 重写路由变化处理函数
+      router.onBeforeRouteChange = (...args: any[]) => {
+        // 执行原有的处理函数
+        if (originalOnBeforeRouteChange) {
+          originalOnBeforeRouteChange.apply(router, args);
+        }
+        
+        // 开始进度条（如果已配置）
+        if (!import.meta.env.SSR) {
+          NProgress.start();
+        }
+      };
+
+      router.onAfterRouteChange = (...args: any[]) => {
+        // 执行原有的处理函数
+        if (originalOnAfterRouteChanged) {
+          originalOnAfterRouteChanged.apply(router, args);
+        }
+        
+        // 路由变化后刷新不蒜子统计
+        handleRouteChange().finally(() => {
+          // 结束进度条（如果已配置）
+          if (!import.meta.env.SSR) {
+            setTimeout(() => {
+              NProgress.done();
+            }, 100);
           }
-        }, 300);
+        });
       };
 
       // 初始化不蒜子统计
