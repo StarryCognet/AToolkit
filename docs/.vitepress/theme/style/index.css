@@ -3,6 +3,7 @@
 @import "./blur.css";
 @import "./rainbow.css";
 @import "./sidebarIcon.css";
+@import "./hidden.css";
 
 /* 隐藏滚动条但保持滚动功能 */
 ::-webkit-scrollbar {

@@ -3,15 +3,13 @@
     <div class="busuanzi-stats" v-if="showStats">
       <span class="stat-item">
         <span class="stat-label">页面浏览量:</span>
-        <span class="stat-value" id="busuanzi_value_page_pv"></span>
-      </span>
-      <span class="stat-item">
+        <span class="stat-value" id="busuanzi_value_page_pv">-</span>|
+
         <span class="stat-label">站点访客数:</span>
-        <span class="stat-value" id="busuanzi_value_site_uv"></span>
-      </span>
-      <span class="stat-item">
+        <span class="stat-value" id="busuanzi_value_site_uv">-</span>|
+
         <span class="stat-label">站点总访问量:</span>
-        <span class="stat-value" id="busuanzi_value_site_pv"></span>
+        <span class="stat-value" id="busuanzi_value_site_pv">-</span>
       </span>
     </div>
     <!-- 加载时显示的模糊动态彩虹占位符 -->

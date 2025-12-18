@@ -39,7 +39,7 @@ export default {
       // 添加鼠标特效组件到布局中
       'layout-top': () => [h(MouseClick), h(MouseFollower)],
       // 添加不蒜子统计组件到H1标题下方
-      'doc-before': () => h(Busuanzi)
+      'doc-after': () => h(Busuanzi)
     })
   },
   extends: DefaultTheme,
@@ -71,7 +71,7 @@ export default {
     app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
     app.component('ToolList', ToolList)
     app.component('Busuanzi', Busuanzi) // 注册不蒜子组件
-    
+
     // 不蒜子统计功能增强实现
     if (inBrowser) {
       // 页面首次加载时初始化统计数据
@@ -98,7 +98,7 @@ export default {
         if (originalOnAfterRouteChanged) {
           originalOnAfterRouteChanged();
         }
-        
+
         // 更新不蒜子统计
         setTimeout(() => {
           if (typeof busuanzi !== 'undefined') {
