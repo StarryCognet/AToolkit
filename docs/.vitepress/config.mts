@@ -6,19 +6,48 @@ import { pagefindPlugin, chineseSearchOptimize } from 'vitepress-plugin-pagefind
 export default defineConfig({
   title: "AToolkit",
   description: "AToolkit",
+  // 添加 lastUpdated 配置
+  lastUpdated: true,
   //fav图标
   head: [
     ['link', { rel: 'icon', href: '/logo.png' }],
   ],
+  // 站点地图
+  sitemap: {
+    hostname: 'https://atoolkit.starrymiku.com',
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     sidebarMenuLabel: "菜单",
     outlineTitle: "页面内容",
     darkModeSwitchLabel: "切换主题",
+    
+    //编辑本页
+    editLink: { 
+      pattern: 'https://github.com/StarryCognet/AToolkit/edit/main/docs/:path',
+      text: '在GitHub编辑本页'
+    },
+    
+    //上次更新时间
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'medium'
+      },
+    },
+    
+    //自定义上下页名
+    docFooter: { 
+      prev: '上一页', 
+      next: '下一页', 
+    },
+    
     nav: [
       { text: '首页', link: '/' },
       { text: '教程', link: '/使用教程' },
       { text: '目录', link: '/目录' },
+      { text: '博客', link: 'https://starrymiku.com' },
       {
         text: '工具分类',
         items: [
