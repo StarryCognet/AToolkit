@@ -11,6 +11,7 @@ export default defineConfig({
   //fav图标
   head: [
     ['link', { rel: 'icon', href: '/logo.png' }],
+    ['meta', { name: 'baidu-site-verification', content: 'codeva-vzfHzHbtqr' }]
   ],
   // 站点地图
   sitemap: {
@@ -21,13 +22,13 @@ export default defineConfig({
     sidebarMenuLabel: "菜单",
     outlineTitle: "页面内容",
     darkModeSwitchLabel: "切换主题",
-    
+
     //编辑本页
-    editLink: { 
+    editLink: {
       pattern: 'https://github.com/StarryCognet/AToolkit/edit/main/docs/:path',
       text: '在GitHub编辑本页'
     },
-    
+
     //上次更新时间
     lastUpdated: {
       text: '最后更新于',
@@ -36,13 +37,13 @@ export default defineConfig({
         timeStyle: 'medium'
       },
     },
-    
+
     //自定义上下页名
-    docFooter: { 
-      prev: '上一页', 
-      next: '下一页', 
+    docFooter: {
+      prev: '上一页',
+      next: '下一页',
     },
-    
+
     nav: [
       { text: '首页', link: '/' },
       { text: '教程', link: '/使用教程' },
