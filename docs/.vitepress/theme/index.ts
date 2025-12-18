@@ -38,17 +38,12 @@ export default {
       'doc-footer-before': () => h(backtotop),
       // 添加鼠标特效组件到布局中
       'layout-top': () => [h(MouseClick), h(MouseFollower)],
-      // 添加不蒜子统计组件到页面标题下方
-      'doc-after': () => h(Busuanzi)
+      // 添加不蒜子统计组件到H1标题下方
+      'doc-before': () => h(Busuanzi)
     })
   },
   extends: DefaultTheme,
   enhanceApp({ app, router }) {
-    if (inBrowser) {
-      router.onAfterRouteChanged = () => {
-        busuanzi.fetch()
-      }
-    }
     // 彩虹背景动画样式
     if (typeof window !== 'undefined') {
       watch(
@@ -76,6 +71,60 @@ export default {
     app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
     app.component('ToolList', ToolList)
     app.component('Busuanzi', Busuanzi) // 注册不蒜子组件
+    
+    // 不蒜子统计功能增强实现
+    if (inBrowser) {
+      // 页面首次加载时初始化统计数据
+      const initBusuanzi = () => {
+        // 确保DOM已经加载完成
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            if (typeof busuanzi !== 'undefined') {
+              setTimeout(() => busuanzi.fetch(), 300);
+            }
+          });
+        } else {
+          // DOM已经加载完成
+          if (typeof busuanzi !== 'undefined') {
+            setTimeout(() => busuanzi.fetch(), 300);
+          }
+        }
+      };
+
+      // 路由变化时更新统计数据
+      const originalOnAfterRouteChanged = router.onAfterRouteChanged;
+      router.onAfterRouteChanged = () => {
+        // 执行原来的回调（如果有）
+        if (originalOnAfterRouteChanged) {
+          originalOnAfterRouteChanged();
+        }
+        
+        // 更新不蒜子统计
+        setTimeout(() => {
+          if (typeof busuanzi !== 'undefined') {
+            busuanzi.fetch();
+          } else {
+            // 如果busuanzi未定义，尝试重新加载
+            const script = document.createElement('script');
+            script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.js';
+            script.async = true;
+            script.charset = 'utf-8';
+            script.crossOrigin = 'anonymous';
+            script.onload = () => {
+              setTimeout(() => {
+                if (typeof busuanzi !== 'undefined') {
+                  busuanzi.fetch();
+                }
+              }, 100);
+            };
+            document.head.appendChild(script);
+          }
+        }, 300);
+      };
+
+      // 初始化不蒜子统计
+      initBusuanzi();
+    }
   },
   setup() {
     // Get frontmatter and route
