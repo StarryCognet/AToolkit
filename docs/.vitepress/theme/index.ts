@@ -24,6 +24,7 @@ import notice from "./components/notice.vue";
 import MouseClick from "./components/MouseClick.vue"
 import MouseFollower from "./components/MouseFollower.vue"
 import HomeUnderline from "./components/HomeUnderline.vue"
+import Busuanzi from "./components/Busuanzi.vue" // 导入不蒜子组件
 
 // 彩虹背景动画样式
 let homePageStyle: HTMLStyleElement | undefined
@@ -36,7 +37,9 @@ export default {
       // 'layout-top': () => h(notice),
       'doc-footer-before': () => h(backtotop),
       // 添加鼠标特效组件到布局中
-      'layout-top': () => [h(MouseClick), h(MouseFollower)]
+      'layout-top': () => [h(MouseClick), h(MouseFollower)],
+      // 添加不蒜子统计组件到页面标题下方
+      'doc-after': () => h(Busuanzi)
     })
   },
   extends: DefaultTheme,
@@ -72,6 +75,7 @@ export default {
     app.component('MouseFollower', MouseFollower)
     app.component('HomeUnderline', HomeUnderline) // 注册首页文字下划线组件
     app.component('ToolList', ToolList)
+    app.component('Busuanzi', Busuanzi) // 注册不蒜子组件
   },
   setup() {
     // Get frontmatter and route
