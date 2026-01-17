@@ -26,11 +26,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { inBrowser } from 'vitepress';
 
 const showStats = ref(false);
 
-// 确保在浏览器环境中才执行
-if (typeof window !== "undefined") {
+// 只在浏览器环境中执行
+if (inBrowser) {
   onMounted(() => {
     // 延迟一小段时间再显示，确保更好的视觉效果
     setTimeout(() => {
@@ -79,7 +80,7 @@ if (typeof window !== "undefined") {
 .busuanzi-container {
   margin: 16px 0 24px 0;
   padding: 8px 0;
-  /* border-bottom: 1px solid var(--vp-c-divider); */
+  /* border-bottom: 1px solid var(--vp-c-divider) */
 }
 
 .busuanzi-stats {

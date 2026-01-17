@@ -44,17 +44,35 @@ export default {
   },
   extends: DefaultTheme,
   enhanceApp({ app, router }) {
-    // 彩虹背景动画样式
-    if (typeof window !== 'undefined') {
+    // 彩虹背景动画样式 - 只在浏览器中运行
+    if (typeof window !== 'undefined' && inBrowser) {
+      const updateHomePageStyle = (value: boolean) => {
+        if (value) {
+          if (homePageStyle) return
+
+          homePageStyle = document.createElement('style')
+          homePageStyle.innerHTML = `
+          :root {
+            animation: rainbow 12s linear infinite;
+          }`
+          document.body.appendChild(homePageStyle)
+        } else {
+          if (!homePageStyle) return
+
+          homePageStyle.remove()
+          homePageStyle = undefined
+        }
+      }
+
       watch(
         () => router.route.data.relativePath,
         () => updateHomePageStyle(location.pathname === '/'),
         { immediate: true },
       )
     }
+    
     // 非SSR环境下配置路由进度条
-    // @ts-ignore-error
-    if (!import.meta.env.SSR) {
+    if (inBrowser) {
       NProgress.configure({ showSpinner: false });
       router.onBeforeRouteChange = () => NProgress.start();
       router.onAfterRouteChange = () => {
@@ -63,8 +81,9 @@ export default {
         }, 100);
       };
     }
+    
     app.component("Confetti", Confetti); //注册全局组件
-    app.component("DataPanel", DataPanel);//注册全局组件
+    app.component("DataPanel", DataPanel); //注册全局组件
     app.component('ArticleMetadata', ArticleMetadata)
     app.component('MouseClick', MouseClick)
     app.component('MouseFollower', MouseFollower)
@@ -72,7 +91,7 @@ export default {
     app.component('ToolList', ToolList)
     app.component('Busuanzi', Busuanzi) // 注册不蒜子组件
     
-    // 不蒜子统计功能增强实现
+    // 不蒜子统计功能增强实现 - 只在浏览器环境中运行
     if (inBrowser) {
       // 加载不蒜子脚本的函数
       const loadBusuanziScript = () => {
@@ -153,7 +172,7 @@ export default {
         }
         
         // 开始进度条（如果已配置）
-        if (!import.meta.env.SSR) {
+        if (inBrowser) {
           NProgress.start();
         }
       };
@@ -167,7 +186,7 @@ export default {
         // 路由变化后刷新不蒜子统计
         handleRouteChange().finally(() => {
           // 结束进度条（如果已配置）
-          if (!import.meta.env.SSR) {
+          if (inBrowser) {
             setTimeout(() => {
               NProgress.done();
             }, 100);
@@ -187,13 +206,18 @@ export default {
       // mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' }); // 默认
       mediumZoom('.main img', { background: 'var(--vp-c-bg)' }); // 不显式添加{data-zoomable}的情况下为所有图像启用此功能
     };
-    onMounted(() => {
-      initZoom();
-    });
-    watch(
-      () => route.path,
-      () => nextTick(() => initZoom())
-    );
+    
+    // 只在浏览器环境中运行
+    if (inBrowser) {
+      onMounted(() => {
+        initZoom();
+      });
+      watch(
+        () => route.path,
+        () => nextTick(() => initZoom())
+      );
+    }
+    
     // giscus配置
     giscusTalk({
       repo: 'StarryCognet/AToolkit', //仓库
@@ -209,27 +233,8 @@ export default {
       },
       //默认值为true，表示已启用，此参数可以忽略；
       //如果为false，则表示未启用
-      //您可以使用“comment:true”序言在页面上单独启用它
+      //您可以使用"comment:true"序言在页面上单独启用它
       true
     );
-  }
-}
-
-
-function updateHomePageStyle(value: boolean) {
-  if (value) {
-    if (homePageStyle) return
-
-    homePageStyle = document.createElement('style')
-    homePageStyle.innerHTML = `
-    :root {
-      animation: rainbow 12s linear infinite;
-    }`
-    document.body.appendChild(homePageStyle)
-  } else {
-    if (!homePageStyle) return
-
-    homePageStyle.remove()
-    homePageStyle = undefined
   }
 }
