@@ -9,9 +9,28 @@ export default defineConfig({
   // 添加 lastUpdated 配置
   lastUpdated: true,
   //fav图标
+  // head: [
+  //   ['link', { rel: 'icon', href: '/logo.png' }],
+  //   ['meta', { name: 'baidu-site-verification', content: 'codeva-vzfHzHbtqr' }]
+  // ],
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
-    ['meta', { name: 'baidu-site-verification', content: 'codeva-vzfHzHbtqr' }]
+    // PNG 格式图标（96x96）
+    ['link', { rel: 'icon', type: 'image/png', href: '/favicon-96x96.png', sizes: '96x96' }],
+
+    // SVG 格式（现代浏览器首选）
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+
+    // 传统 ICO 格式（兼容旧浏览器）
+    ['link', { rel: 'shortcut icon', href: '/favicon.ico' }],
+
+    // iOS Safari 主屏幕图标（最关键）
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
+
+    // iOS 应用标题（可选）
+    ['meta', { name: 'apple-mobile-web-app-title', content: 'MyWebSite' }],
+
+    // Web App Manifest（Android/Chrome PWA 用）
+    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
   ],
   // 站点地图
   sitemap: {
