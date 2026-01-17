@@ -13,7 +13,7 @@ hero:
   actions:
     - theme: brand
       text: 下载整合包
-      link: https://file.starrymiku.com/AToolkit/docs/A%E6%95%B4%E5%90%88%E5%8C%85%E5%AF%BC%E8%88%AA.xlsx
+      link: https://file.starrymiku.com/AToolkit/AToolkit.7z
     - theme: alt
       text: 查看目录
       link: /目录
