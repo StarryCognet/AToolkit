@@ -47,7 +47,7 @@ if (inBrowser) {
       const loadBusuanziScript = () => {
         // 首先尝试加载本地版本
         const script = document.createElement("script");
-        script.src = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.js";
+        script.src = "https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js";
         script.async = true;
         script.charset = "utf-8";
         script.crossOrigin = "anonymous";

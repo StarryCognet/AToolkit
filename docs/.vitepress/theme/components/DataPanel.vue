@@ -5,6 +5,16 @@
     <div class="container">
       <section class="grid">
         <div class="stat-card">
+          <span class="label">今日总访问量</span>
+          <span id="busuanzi_value_today_pv" class="value">0</span>
+          <span class="unit">次</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">今日总访客数</span>
+          <span id="busuanzi_value_today_uv" class="value">0</span>
+          <span class="unit">人</span>
+        </div>
+        <div class="stat-card">
           <span class="label">本站总访问量</span>
           <span id="busuanzi_value_site_pv" class="value">0</span>
           <span class="unit">次</span>
@@ -18,6 +28,11 @@
           <span class="label">本页总阅读量</span>
           <span id="busuanzi_value_page_pv" class="value">0</span>
           <span class="unit">次</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">本页总访客数</span>
+          <span id="busuanzi_value_page_uv" class="value">0</span>
+          <span class="unit">人</span>
         </div>
       </section>
     </div>
