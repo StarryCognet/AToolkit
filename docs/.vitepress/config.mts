@@ -81,7 +81,8 @@ export default defineConfig({
           { text: '网络工具', link: '/tools/网络工具' },
           { text: '安全与卸载', link: '/tools/安全与卸载' },
           { text: '游戏相关', link: '/tools/游戏相关' },
-          { text: '效率与时间管理', link: '/tools/效率与时间管理' }
+          { text: '效率与时间管理', link: '/tools/效率与时间管理' },
+          { text: '技巧', link: '/技巧/' }
         ]
       }
     ],
