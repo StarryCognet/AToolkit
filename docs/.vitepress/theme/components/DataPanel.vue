@@ -5,16 +5,6 @@
     <div class="container">
       <section class="grid">
         <div class="stat-card">
-          <span class="label">今日总访问量</span>
-          <span id="busuanzi_today_pv" class="value">0</span>
-          <span class="unit">次</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">今日总访客数</span>
-          <span id="busuanzi_today_uv" class="value">0</span>
-          <span class="unit">人</span>
-        </div>
-        <div class="stat-card">
           <span class="label">本站总访问量</span>
           <span id="busuanzi_value_site_pv" class="value">0</span>
           <span class="unit">次</span>
@@ -25,14 +15,9 @@
           <span class="unit">人</span>
         </div>
         <div class="stat-card">
-          <span class="label">本页总阅读量</span>
+          <span class="label">本页阅读量</span>
           <span id="busuanzi_value_page_pv" class="value">0</span>
           <span class="unit">次</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">本页总访客数</span>
-          <span id="busuanzi_value_page_uv" class="value">0</span>
-          <span class="unit">人</span>
         </div>
       </section>
     </div>
@@ -104,8 +89,8 @@
 
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 
   .container {
@@ -117,7 +102,7 @@
   }
 
   .label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .value {
@@ -127,7 +112,8 @@
 
 @media (max-width: 480px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 
   .panel {

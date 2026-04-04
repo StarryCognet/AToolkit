@@ -2,21 +2,13 @@
   <div class="busuanzi-container">
     <div class="busuanzi-stats" v-if="showStats">
       <span class="stat-item">
-        <span class="stat-label">页面浏览量:</span>
+        <span class="stat-label">本页阅读量:</span>
         <span class="stat-value" id="busuanzi_value_page_pv"></span>
-      </span>
-      <span class="stat-item">
-        <span class="stat-label">站点访客数:</span>
-        <span class="stat-value" id="busuanzi_value_site_uv"></span>
-      </span>
-      <span class="stat-item">
-        <span class="stat-label">站点总访问量:</span>
-        <span class="stat-value" id="busuanzi_value_site_pv"></span>
       </span>
     </div>
     <!-- 加载时显示的模糊动态彩虹占位符 -->
     <div class="busuanzi-placeholder" v-else>
-      <div class="placeholder-item" v-for="i in 3" :key="i">
+      <div class="placeholder-item">
         <div class="placeholder-label"></div>
         <div class="placeholder-value"></div>
       </div>
