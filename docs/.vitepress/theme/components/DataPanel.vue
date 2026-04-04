@@ -3,8 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 // 网站开始运行时间：2025年12月16日
 const startTime = new Date('2025-12-16T00:00:00').getTime()
-const runningTime = ref('0天0时0分0秒')
+const runningTime = ref('00天00时00分00秒')
 let timer: ReturnType<typeof setInterval> | null = null
+
+function pad(n: number, len = 2) {
+  return String(n).padStart(len, '0')
+}
 
 function updateRunningTime() {
   const now = Date.now()
@@ -24,7 +28,7 @@ function updateRunningTime() {
   const m = minutes % 60
   const h = hours % 24
   
-  runningTime.value = `${days}天${h}时${m}分${s}秒`
+  runningTime.value = `${pad(days)}天${pad(h)}时${pad(m)}分${pad(s)}秒`
 }
 
 onMounted(() => {
@@ -59,6 +63,7 @@ onUnmounted(() => {
         <div class="stat-card highlight">
           <span class="label">网站已运行</span>
           <span class="value time">{{ runningTime }}</span>
+          <span class="unit">&nbsp</span>
         </div>
       </section>
     </div>
@@ -109,9 +114,6 @@ onUnmounted(() => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.stat-card.highlight {
-  background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-bg-elv));
-}
 
 .label {
   font-size: 0.8rem;
@@ -127,7 +129,7 @@ onUnmounted(() => {
 
 .value.time {
   font-size: 1rem;
-  font-family: 'Courier New', monospace;
+
 }
 
 .unit {
