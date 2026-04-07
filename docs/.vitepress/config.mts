@@ -82,7 +82,7 @@ export default defineConfig({
           { text: '安全与卸载', link: '/tools/安全与卸载' },
           { text: '游戏相关', link: '/tools/游戏相关' },
           { text: '效率与时间管理', link: '/tools/效率与时间管理' },
-          { text: '技巧', link: '/技巧/' }
+          { text: '技巧', link: 'https://starrymiku.com/hashtag/%E6%8A%80%E5%B7%A7' }
         ]
       }
     ],
